@@ -39,15 +39,17 @@ $xjax->jq([jquery select], [func], [params[]]);
 #### chaining functions 
 x takes the last input and chains it
 ```php
-- $xjax->x([func], [params[]]);
+$xjax->x([func], [params[]]);
+// example
+$xjax->jq('#id', 'html', 'new header')->x('style', 'color', 'red');
 ```
 
 #### context functions
 if the context parameter is passed on jquery, you can start at the context (target) object.
 ```php
-- xjax->at([func], [params[]]);
-- xjax->jqat([jquery], [func], [params[]]);
-- xjax->jqat([jquery], [func], [params[]]);
+xjax->at([func], [params[]]);
+xjax->jqat([jquery], [func], [params[]]);
+xjax->jqat([jquery], [func], [params[]]);
 ```
 
 
