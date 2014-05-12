@@ -21,6 +21,8 @@ $xj->jq('a', 'css', 'style', 'blue');
 
 // $('h1').html('New Header').css('color', 'green');
 $xj->jq('h1', 'html', 'New Header')->x('css', 'color', 'green');
+// or
+$xj->jq('h1')->x('html', 'New Header')->x('css', 'color', 'green');
 
 // done
 $xj->done();
