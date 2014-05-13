@@ -1,7 +1,7 @@
 xjax (beta)
 ====
 
-xjax is a library for making jquery and object/function calls from PHP.
+xjax is a library for making jquery and object/function calls from PHP eliminating the writing of $.ajax Success functions.
 
 
 ### the problem
