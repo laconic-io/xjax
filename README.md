@@ -1,9 +1,11 @@
 xjax (beta)
 ====
 
-XJAX is a library for making jquery and object/function calls from PHP.
+xjax is a library for making jquery and object/function calls from PHP.
 
-Most Programming is done in three steps (refered to as MVC).
+
+### the problem
+Most Programming is done in three steps (sometimes referred to as MVC).
 
 - 1. input
 - 2. process
@@ -13,10 +15,12 @@ However with ajax there is an extra step
 
 - 1. input (ajax request)
 - 2. process (php or backend)
-- 3a. output format to JSON/XML
+- 3a. format output to JSON/XML
 - 3b. process JSON/XML for outputting in javascript
 
-What xjax does is eliminates the extra formatting step (3a) and allows you to call javascript functons and set values "directly". Meaning no need for a "success" function on xjax.
+### my proposed solution
+
+xjax eliminates the extra formatting step (3a) and allows you to call javascript functons and set values "directly". Meaning no need for a "success" function on xjax.
 
 #### the javascript
 ```javscript
@@ -30,6 +34,7 @@ $.xjax({
   error: function(){
     alert('error');
   }
+  // can put success function but no need
 });
 // all works exactly the same
 ```
@@ -77,36 +82,27 @@ $xj->data('key', ['large'=> ['crazy', 'object'], 'thingy'=> 'over 9000!!');
 // set whole json object
 $xj->json = ['stuff' => 'here', etc...];
 
-
 // done outputs json
 $xj->done();
 ```
+
 As you can tell from above there is no need to write a success function. xjax takes the data and parses it for you making the changes.
 
-#### main functions list
+#### functions list
 ```php
-the list of xjax functions are as follow
-$xjax->win([func], [params[]]); starting at window
-$xjax->doc([func], [params[]]); starting at document
-$xjax->jq([jquery select]); or
-$xjax->jq([jquery select], [func], [params[]]); 
-```
+// starting functions
+xjax->win([func], [params[]]); starting at window
+xjax->jq([jquery select], [func], [params[]]); 
 
-#### chaining function 
-x takes the last input and chains it
-```php
-$xjax->x([func], [params[]]);
-```
-
-#### context functions
-if the context parameter is passed on jquery, you can start at the context (target) object.
-```php
+// starting at xjax/ajax context
 xjax->at([func], [params[]]);
 xjax->jqat([jquery], [func], [params[]]);
+
+// chaining function to append to any above
+xjax->x([func], [params[]]);
+
+// data
+xjax->data(key, value);
+xjax->json = [whole object to return];
 ```
 
-#### data functions
-```php
-xjax->data('key', [object|var|whatever..];
-xjax->json = ['set', 'whole', 'json'];
-```
