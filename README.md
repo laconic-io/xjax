@@ -3,26 +3,32 @@ xjax (beta)
 
 xjax is a library for making jquery and object/function calls from PHP eliminating the writing of $.ajax Success functions.
 
-
 ### the problem
-Most Programming is done in three steps (sometimes referred to as MVC).
+most programming is done in three steps (sometimes referred to as MVC).
 
-1. input
-2. process
-3. output
+1. input (user does something)
+2. process (processes the input to react correctly)
+3. output (show results to use).
 
-However with ajax there is an extra step
+however with ajax/(RESTful) architecture there is an extra step
 
 1. input (ajax request)
-2. process (php/backend)
-3. format (on backend) to JSON/XML
-4. output (javscript) by processing JSON/XML to know how to manipulate dom
+2. process (php/ruby/python/asp backend)
+3. format (on backend) to JSON/XML to send to browser
+4. output (javscript) by processing JSON/XML to know how to manipulate dom+variables
 
-### proposed solution, remove format step
+you basically end up writing api's for your own system. it's annoying, time consuming, and debugging becomes a bigger hassle when you icrease the possible locations for bugs to hide.
 
-xjax eliminates the extra formatting middleman step by allowing you to call javascript functons, jQuery, and set javascript variables in php. This means no need to write a success function.
+### proposed solution... simply remove the step
+xjax attempts eliminates the extra formatting middleman step by allowing you to specify front end proccess/function to call on the back end. This means no need to write an ajax success function.
 
-example syntax below and functional/working examples with forms and more http://laconic.io/xjax/
+this is done in
+- 1 javascript file, less than 2kb (uncompressed and documented)
+- 1 php file, less than 2kb
+
+for functional/working examples with forms and more goto http://laconic.io/xjax/
+
+otherwise some syntax examples below.
 
 #### the javascript
 ```javascript
@@ -37,7 +43,7 @@ $.xjax({url: '/some/url',  context:document.body,  type: 'post'});
 // create class
 $xj = new xjax;
 
-// call window function
+// call any function
 $xj->win('alert', 'hello world');
 // calls: window.alert('hello world');
 $xj->win('test.func', 'hello', 'world');
@@ -46,11 +52,11 @@ $xj->win('test.func', 'hello', 'world');
 // call jquery functions
 $xj->jq('a')->x('css', 'style', 'blue');
 // calls: $('a').css('style', 'blue');
+// x function can be chained infinite times
 
-// $('a').css('style', 'blue');
-$xj->jq('a')->x('css', 'style', 'blue');
-// or (same as above, little short cut)
-$xj->jq('a', 'css', 'style', 'blue');
+$xj->jq('h1')->x('html', 'New Header!!');
+$xj->jq('h1', 'html', 'New Header!!');
+// both call: $('h1').css('New Header!!);
 
 // call functions starting at ajax/xjax context
 // $.xjax({url:'/xjax', context:[context]});
@@ -78,8 +84,7 @@ $xj->json = ['stuff' => 'here', etc...];
 // done outputs json
 $xj->done();
 ```
-
-As you can tell from above there is no need to write a success function. xjax takes the data and parses it for you making the changes.
+as you can tell from above there is no need to write a success function. xjax takes the data and parses it for you making the changes.
 
 #### functions list
 ```php
@@ -98,4 +103,3 @@ xjax->x([func], [params[]]);
 xjax->data(key, value);
 xjax->json = [whole object to return];
 ```
-
