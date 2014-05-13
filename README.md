@@ -20,7 +20,7 @@ However with ajax there is an extra step
 
 ### my proposed solution
 
-xjax eliminates the extra formatting step (3a) and allows you to call javascript functons and set values "directly". Meaning no need for a "success" function on xjax.
+xjax eliminates the extra formatting step (merges 3a/3b back to 3) by allowing allows you to call javascript functons and set values "directly". Meaning no need for a "success" function on xjax.
 
 #### the javascript
 ```javscript
@@ -29,7 +29,7 @@ xjax eliminates the extra formatting step (3a) and allows you to call javascript
 $.ajax(); to $.xjax();
 $.xjax({
   url: '/some/url' ,
-  context: 'form' ,
+  context: document.body ,
   type: 'post' ,
   error: function(){
     alert('error');
