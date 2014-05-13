@@ -7,36 +7,29 @@ xjax is a library for making jquery and object/function calls from PHP.
 ### the problem
 Most Programming is done in three steps (sometimes referred to as MVC).
 
-- 1. input
-- 2. process
-- 3. output
+1. input
+2. process
+3. output
 
 However with ajax there is an extra step
 
-- 1. input (ajax request)
-- 2. process (php or backend)
-- 3a. format output to JSON/XML
-- 3b. process JSON/XML for outputting in javascript
+1. input (ajax request)
+2. process (php/backend)
+3. format (on backend) to JSON/XML
+4. output (javscript) by processing JSON/XML to know how to manipulate dom
 
-### my proposed solution
+### proposed solution, remove format step
 
-xjax eliminates the extra formatting step (merges 3a/3b back to 3) by allowing allows you to call javascript functons and set values "directly". Meaning no need for a "success" function on xjax.
+xjax eliminates the extra formatting middleman step by allowing you to call javascript functons, jQuery, and set javascript variables in php. This means no need to write a success function.
+
+example syntax below and functional/working examples with forms and more http://laconic.io/xjax/
 
 #### the javascript
-```javscript
-// instead of ajax use xjax, works identicle
-// the only difference is xjax forces dataType JSON and adds success function
-$.ajax(); to $.xjax();
-$.xjax({
-  url: '/some/url' ,
-  context: document.body ,
-  type: 'post' ,
-  error: function(){
-    alert('error');
-  }
-  // can put success function but no need
-});
-// all works exactly the same
+```javascript
+// instead of $.ajax use $.xjax
+// $.xjax is identicle to $.ajax. Except it forces a json type
+$.xjax({url: '/some/url',  context:document.body,  type: 'post'});
+// all works exactly the same as $.ajax();
 ```
 
 #### the php
